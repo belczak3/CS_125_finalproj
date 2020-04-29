@@ -11,10 +11,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+    
     int zeroPrime;
     int onePrime;
     int twoPrime;
 
+    public int getZeroPrime() {
+        return zeroPrime;
+    }
+
+    public void setZeroPrime(int zeroPrime) {
+        this.zeroPrime = zeroPrime;
+    }
+
+    public int getOnePrime() {
+        return onePrime;
+    }
+
+    public void setOnePrime(int onePrime) {
+        this.onePrime = onePrime;
+    }
+
+    public int getTwoPrime() {
+        return twoPrime;
+    }
+
+    public void setTwoPrime(int twoPrime) {
+        this.twoPrime = twoPrime;
+    }
 }
 /** The main activity will contain the labels of terms needed for a first or second linear
  * differential equation. There will be some sort of input to type the coefficients associated
