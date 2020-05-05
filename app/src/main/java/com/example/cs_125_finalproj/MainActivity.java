@@ -129,29 +129,3 @@ public class MainActivity extends AppCompatActivity {
  * constants. We will need to use some sort of Java math library that deals with calculus so
  * that the math for the coding is easier. There will be a calculate button, that will print
  * the solution to the differential equation.*/
-
-public String solve(int zeroPrime, int onePrime) {
-    String input = onePrime + "y' + " + zeroPrime + "y = 0";
-    if ((onePrime == null) || (zeroPrime == null)) {
-        /** do not run */
-    }
-    WAQueryParameters java.lang.String toWebsiteURL(https://www.wolframalpha.com/calculators/integral-calculator/);
-    WAPod for "indefinite integral";
-    String answer = WAPlainText getText(differential equation solution);
-    return answer;
-}
-
-    /** Function for differential equation calculation
-     * First create a void method that creates a string "plugging in" the coefficients
-     * for the first order differential equation, including the "= 0"
-     * Copy the URL for the wolfram alpha integral calculator website
-     * (https://www.wolframalpha.com/calculators/integral-calculator/)
-     *  Insert the created input string into the pod for the wolfram alpha online
-     *  integral calculator
-     *  Check to see if both zeroPrime and onePrime exist
-     *  If both coefficients exist, use "calculate" button to start the function
-     *  Have the online integral calculator run
-     *  Retrieve the result from the differential equation solution pod
-     *  Create a new string with the retrieved result
-     *  Return the newly created answer string
-     */
