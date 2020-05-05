@@ -1,10 +1,14 @@
 package com.example.cs_125_finalproj;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 import com.wolfram.alpha.WAEngine;
 import com.wolfram.alpha.WAException;
 import com.wolfram.alpha.WAPlainText;
@@ -21,47 +25,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button calculate = findViewById(R.id.toCalculate);
+
+        final Button calculate = findViewById(R.id.toCalculate);
         calculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+                TextInputEditText fCoef = findViewById(R.id.firstOrder);
+
+                TextView diffeq = findViewById(R.id.answer);
+                diffeq.setText(answer);
             }
         });
+
     }
 
-    int zeroPrime;
-    int onePrime;
-    int twoPrime;
-
-    public int getZeroPrime() {
-        return zeroPrime;
-    }
-
-    public void setZeroPrime(int zeroPrime) {
-        this.zeroPrime = zeroPrime;
-    }
-
-    public int getOnePrime() {
-        return onePrime;
-    }
-
-    public void setOnePrime(int onePrime) {
-        this.onePrime = onePrime;
-    }
-
-    public int getTwoPrime() {
-        return twoPrime;
-    }
-
-    public void setTwoPrime(int twoPrime) {
-        this.twoPrime = twoPrime;
-    }
     // PUT YOUR APPID HERE:
     private static String appid = "95KPE7-6HAHWW7VGW";
 
-    private static String answer;
-
-    public static void WolframResult(String args) {
+    public static String WolframResult(String args) {
 
         // Use "pi" as the default query, or caller can supply it as the lone command-line argument.
         String input = args;
@@ -111,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
                             for (Object element : subpod.getContents()) {
                                 if (element instanceof WAPlainText) {
                                     System.out.println(((WAPlainText) element).getText());
-                                    answer = ((WAPlainText) element).getText();
+                                    String answer = ((WAPlainText) element).getText();
+                                    return answer;
                                 }
                             }
                         }
@@ -124,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }
+
 /** The main activity will contain the labels of terms needed for a first or second linear
  * differential equation. There will be some sort of input to type the coefficients associated
  * with each term. There will also be a place to insert the symbol for the independent variable
