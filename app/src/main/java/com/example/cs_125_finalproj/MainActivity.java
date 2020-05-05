@@ -21,6 +21,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button calculate = findViewById(R.id.toCalculate);
+        calculate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+            }
+        });
     }
 
     int zeroPrime;
@@ -54,15 +60,6 @@ public class MainActivity extends AppCompatActivity {
     private static String appid = "95KPE7-6HAHWW7VGW";
 
     private static String answer;
-
-    private void clicked() {
-        Button calculate = findViewById(R.id.toCalculate);
-        calculate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(final View v) {
-
-            }
-        });
-    }
 
     public static void WolframResult(String args) {
 
