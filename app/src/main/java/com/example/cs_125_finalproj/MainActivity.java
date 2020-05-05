@@ -3,6 +3,7 @@ package com.example.cs_125_finalproj;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final Button calculate = findViewById(R.id.toCalculate);
+        calculate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TextView diffeq = findViewById(R.id.textView7);
+                diffeq.setText(answer);
+            }
+        });
+
     }
 
     int zeroPrime;
@@ -47,15 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private static String appid = "95KPE7-6HAHWW7VGW";
 
     private static String answer;
-
-    private void clicked() {
-        Button calculate = findViewById(R.id.toCalculate);
-        calculate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(final View v) {
-
-            }
-        });
-    }
 
     public static void WolframResult(String args) {
 
