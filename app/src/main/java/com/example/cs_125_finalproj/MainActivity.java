@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.wolfram.alpha.WAEngine;
 import com.wolfram.alpha.WAException;
 import com.wolfram.alpha.WAPlainText;
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         final Button calculate = findViewById(R.id.toCalculate);
         calculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                TextInputEditText first = findViewById(R.id.textInputEditText);
+                first.setText(onePrime);
+                TextInputEditText second = findViewById(R.id.textInputEditText2);
+                second.setText(zeroPrime);
+                String args = first + "y' + " + second + "y = 0";
                 TextView diffeq = findViewById(R.id.textView7);
                 diffeq.setText(answer);
             }
