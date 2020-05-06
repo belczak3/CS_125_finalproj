@@ -13,7 +13,7 @@
         android:id="@+id/indVariable"
         android:layout_width="130dp"
         android:layout_height="66dp"
-        android:hint="hint"
+        android:hint="put something"
         tools:layout_editor_absoluteX="202dp"
         tools:layout_editor_absoluteY="261dp" />
 
@@ -68,7 +68,7 @@
         tools:layout_editor_absoluteY="367dp" />
 
     <TextView
-        android:id="@+id/zeroLabel"
+        android:id="@+id/secondInputLabel"
         android:layout_width="24dp"
         android:layout_height="62dp"
         android:gravity="center_vertical"
@@ -97,7 +97,7 @@
         tools:layout_editor_absoluteY="367dp" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText2"
+        android:id="@+id/secondInput"
         android:layout_width="116dp"
         android:layout_height="62dp"
         android:hint="hint"
@@ -106,7 +106,7 @@
         tools:layout_editor_absoluteY="367dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/firstInputLabel"
         android:layout_width="64dp"
         android:layout_height="62dp"
         android:gravity="center_vertical"

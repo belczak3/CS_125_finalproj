@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.wolfram.alpha.WAEngine;
 import com.wolfram.alpha.WAException;
 import com.wolfram.alpha.WAPlainText;
@@ -27,40 +28,28 @@ public class MainActivity extends AppCompatActivity {
         final Button calculate = findViewById(R.id.toCalculate);
         calculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                TextView diffeq = findViewById(R.id.textView7);
-                diffeq.setText(answer);
+                TextInputEditText firstInput = findViewById(R.id.firstInput);
+                String firstCoef = firstInput.getText().toString();
+                TextInputEditText secondInput = findViewById(R.id.secondInput);
+                String secondCoef = secondInput.getText().toString();
+                TextInputEditText indVarInput = findViewById(R.id.indVariable);
+                String indVariable = indVarInput.getText().toString();
+                String toGive = firstCoef + " * dy/d" + indVariable + " + " + secondCoef + " * y = 0";
+                String result = WolframResult(toGive);
+                TextView diffEq = findViewById(R.id.answer);
+                diffEq.setText(result);
             }
         });
 
     }
 
-    int zeroPrime;
-    int onePrime;
-
-    public int getZeroPrime() {
-        return zeroPrime;
-    }
-
-    public void setZeroPrime(int zeroPrime) {
-        this.zeroPrime = zeroPrime;
-    }
-
-    public int getOnePrime() {
-        return onePrime;
-    }
-
-    public void setOnePrime(int onePrime) {
-        this.onePrime = onePrime;
-    }
-
     // PUT YOUR APPID HERE:
     private static String appid = "95KPE7-6HAHWW7VGW";
 
-    private static String answer;
-
-    public static void WolframResult(String args) {
+    public static String WolframResult(String args) {
 
         // Use "pi" as the default query, or caller can supply it as the lone command-line argument.
+        String answer = "Didn't work";
         String input = args;
 
         // The WAEngine is a factory for creating WAQuery objects,
@@ -85,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             // For educational purposes, print out the URL we are about to send:
             System.out.println("Query URL:");
             System.out.println(engine.toURL(query));
-            System.out.println("");
 
             // This sends the URL to the Wolfram|Alpha server, gets the XML result
             // and parses it into an object hierarchy held by the WAQueryResult object.
@@ -101,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 // Got a result.
                 System.out.println("Successful query. Pods follow:\n");
                 for (WAPod pod : queryResult.getPods()) {
-                    if (!pod.isError() && pod.getTitle().equals("Indefinite integral")) {
+                    if (!pod.isError() && pod.getTitle().equals("Differential equation solution")) {
                         System.out.println(pod.getTitle());
                         System.out.println("------------");
                         for (WASubpod subpod : pod.getSubpods()) {
@@ -120,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (WAException e) {
             e.printStackTrace();
         }
+        return answer;
     }
 }
 
