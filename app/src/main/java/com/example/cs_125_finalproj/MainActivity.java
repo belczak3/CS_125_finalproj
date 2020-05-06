@@ -38,10 +38,14 @@ public class MainActivity extends AppCompatActivity {
                 String result = WolframResult(toGive);
                 TextView diffEq = findViewById(R.id.answer);
                 diffEq.setText(result);
+                if (indVariable.length() != 1 || indVariable instanceof char) {
+                    diffEq.setText("incorrect character");
+                }
             }
         });
 
     }
+
 
     // PUT YOUR APPID HERE:
     private static String appid = "95KPE7-6HAHWW7VGW";
