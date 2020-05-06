@@ -1,6 +1,8 @@
 package com.example.cs_125_finalproj;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,31 +26,38 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new Connection().execute();
 
-        final Button calculate = findViewById(R.id.toCalculate);
-        calculate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                TextInputEditText firstInput = findViewById(R.id.firstInput);
-                String firstCoef = firstInput.getText().toString();
-                TextInputEditText secondInput = findViewById(R.id.secondInput);
-                String secondCoef = secondInput.getText().toString();
-                TextInputEditText indVarInput = findViewById(R.id.indVariable);
-                String indVariable = indVarInput.getText().toString();
-                String toGive = firstCoef + " * dy/d" + indVariable + " + " + secondCoef + " * y = 0";
-                String result = WolframResult(toGive);
-                TextView diffEq = findViewById(R.id.answer);
-                diffEq.setText(result);
-                if (indVariable.length() != 1 || indVariable instanceof char) {
-                    diffEq.setText("incorrect character");
+    }
+    private class Connection extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            final Button calculate = findViewById(R.id.toCalculate);
+            calculate.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    TextInputEditText firstInput = findViewById(R.id.firstInput);
+                    String firstCoef = firstInput.getText().toString();
+                    TextInputEditText secondInput = findViewById(R.id.secondInput);
+                    String secondCoef = secondInput.getText().toString();
+                    TextInputEditText indVarInput = findViewById(R.id.indVariable);
+                    String indVariable = indVarInput.getText().toString();
+                    String toGive = firstCoef + " * dy/d" + indVariable + " + " + secondCoef + " * y = 0";
+                    String result = WolframResult(toGive);
+                    TextView diffEq = findViewById(R.id.answer);
+                    diffEq.setText(result);
+                    if (indVariable.length() != 1) {
+                        String error = "too many characters";
+                        diffEq.setText(error);
+                    }
                 }
-            }
-        });
-
+            });
+            return null;
+        }
     }
 
 
     // PUT YOUR APPID HERE:
-    private static String appid = "95KPE7-6HAHWW7VGW";
+    private static String appid = "95KPE7-Q2HH5795R9";
 
     public static String WolframResult(String args) {
 
@@ -76,24 +85,24 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             // For educational purposes, print out the URL we are about to send:
-            System.out.println("Query URL:");
+            Log.v("v", "Query URL:");
             System.out.println(engine.toURL(query));
 
             // This sends the URL to the Wolfram|Alpha server, gets the XML result
             // and parses it into an object hierarchy held by the WAQueryResult object.
             WAQueryResult queryResult = engine.performQuery(query);
-
             if (queryResult.isError()) {
+                Log.v("v", "Query error");
                 System.out.println("Query error");
                 System.out.println("  error code: " + queryResult.getErrorCode());
                 System.out.println("  error message: " + queryResult.getErrorMessage());
             } else if (!queryResult.isSuccess()) {
-                System.out.println("Query was not understood; no results available.");
+                Log.v("v","Query was not understood");
             } else {
                 // Got a result.
-                System.out.println("Successful query. Pods follow:\n");
+                Log.v("v","Successful query.");
                 for (WAPod pod : queryResult.getPods()) {
-                    if (!pod.isError() && pod.getTitle().equals("Differential equation solution")) {
+                    if (pod.getTitle().equals("Differential equation solution")) {
                         System.out.println(pod.getTitle());
                         System.out.println("------------");
                         for (WASubpod subpod : pod.getSubpods()) {
