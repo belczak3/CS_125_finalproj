@@ -31,24 +31,24 @@ public class MainActivity extends AppCompatActivity {
     }
     private class Connection extends AsyncTask<Void, Void, Void> {
         @Override
-        protected Void doInBackground(Void... arg0) {
+        protected Void doInBackground(Void... voids) {
             final Button calculate = findViewById(R.id.toCalculate);
             calculate.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    TextInputEditText firstInput = findViewById(R.id.firstInput);
-                    String firstCoef = firstInput.getText().toString();
-                    TextInputEditText secondInput = findViewById(R.id.secondInput);
-                    String secondCoef = secondInput.getText().toString();
-                    TextInputEditText indVarInput = findViewById(R.id.indVariable);
-                    String indVariable = indVarInput.getText().toString();
-                    String toGive = firstCoef + " * dy/d" + indVariable + " + " + secondCoef + " * y = 0";
-                    String result = WolframResult(toGive);
-                    TextView diffEq = findViewById(R.id.answer);
-                    diffEq.setText(result);
-                    if (indVariable.length() != 1) {
-                        String error = "too many characters";
-                        diffEq.setText(error);
-                    }
+                TextInputEditText firstInput = findViewById(R.id.firstInput);
+                String firstCoef = firstInput.getText().toString();
+                TextInputEditText secondInput = findViewById(R.id.secondInput);
+                String secondCoef = secondInput.getText().toString();
+                TextInputEditText indVarInput = findViewById(R.id.indVariable);
+                String indVariable = indVarInput.getText().toString();
+                String toGive = firstCoef + " * dy/d" + indVariable + " + " + secondCoef + " * y = 0";
+                String result = WolframResult(toGive);
+                TextView diffEq = findViewById(R.id.answer);
+                diffEq.setText(result);
+                if (indVariable.length() != 1) {
+                    String error = "too many characters";
+                    diffEq.setText(error);
+                }
                 }
             });
             return null;
